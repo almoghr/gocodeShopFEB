@@ -9,6 +9,7 @@ const SingleProductPage = () => {
   const { id } = useParams();
 
   const fetchProduct = async () => {
+    console.log(GET_PRODUCT_BY_ID+id)
     const response = await fetch(GET_PRODUCT_BY_ID+id);
     const data = await response.json();
     setProduct(data);
