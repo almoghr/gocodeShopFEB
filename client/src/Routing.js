@@ -46,7 +46,7 @@ const Routing = () => {
     setFunc(0);
   };
   const fetchProducts = async () => {
-    const response = await fetch("http://localhost:8001");
+    const response = await fetch(GET_ALL_PRODUCTS_PATH);
     const data = await response.json();
     setAllProducts(data);
     setCurrentProducts(data);
