@@ -15,6 +15,7 @@ const { PORT, DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static('client/build'))
 
@@ -53,7 +54,7 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model("Product", productSchema);
 
-app.get("/", async (req, res) => {
+app.get("/products", async (req, res) => {
   try {
     const products = await Product.find({});
     res.status(200).send(products);
@@ -162,6 +163,7 @@ app.delete("/product/:id/", async (req, res) => {
 });
 
 app.get("*", (req,res) => {
+  console.log(__dirname)
   res.sendFile(__dirname+"/client/build/index.html")
 })
 
