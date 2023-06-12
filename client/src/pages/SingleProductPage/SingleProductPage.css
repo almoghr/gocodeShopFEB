@@ -1,0 +1,8 @@
+.singleProductContainer > .product-card{
+    width: 400px;
+    height: 600px;
+}
+
+.singleProductContainer > .product-card > .product-info > h5{
+    color: yellow;
+}
