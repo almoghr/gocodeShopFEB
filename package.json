@@ -9,6 +9,9 @@
     "dev": "concurrently \"nodemon server.js\" \"cd client && npm start\"",
     "render-postbuild": "cd client && yarn install && yarn build"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "type": "module",
   "keywords": [],
   "author": "",
