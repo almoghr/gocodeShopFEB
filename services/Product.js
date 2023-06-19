@@ -2,7 +2,8 @@ import { Product } from "../models/Product.js";
 
 export const getAllProducts = () => {
     console.log(2)
-    return Product.find({});
+    return Product.find({}).populate("owner", "-__v");
+    // return Product.find({})
 }
 
 export const getProductById = (id) => {

@@ -13,6 +13,13 @@ import {
   getProductByIdController,
   updateProductController,
 } from "./controllers/Product.js";
+import {
+  addSingleUserController,
+  deleteUserController,
+  getAllUsersController,
+  getUserByIdController,
+  updateUserController,
+} from "./controllers/User.js";
 
 dotenv.config();
 
@@ -27,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static("client/build"));
 
+//product routes
 app.get("/api/products", getAllProductsController);
 app.get("/api/product/:id", getProductByIdController);
 app.get("/api/products/:category", getProductByCategoryController);
@@ -34,6 +42,13 @@ app.post("/api/products", addMultipleProductsController);
 app.post("/api/", addSingleProductController);
 app.put("/api/product/:id", updateProductController);
 app.delete("/api/product/:id/", deleteProductController);
+
+//user routes
+app.get("/api/users", getAllUsersController);
+app.get("/api/user/:id", getUserByIdController);
+app.post("/api/user", addSingleUserController);
+app.put("/api/user/:id", updateUserController);
+app.delete("/api/user/:id/", deleteUserController);
 
 app.get("*", (req, res) => {
   console.log(__dirname);

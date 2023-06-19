@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema({
         default: 0,
       },
     },
+    owner:{
+       type: mongoose.Schema.Types.ObjectId, ref: 'User',
+       required:true
+    }
   });
   
   export const Product = mongoose.model("Product", productSchema);
