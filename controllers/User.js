@@ -2,8 +2,10 @@ import {
   addSingleUser,
   deleteUser,
   getAllUsers,
+  getUserByEmail,
   getUserById,
 } from "../services/User.js";
+import { comparePassWithDBPass, hashPass } from "../utils/hashPassword.js";
 
 export const getAllUsersController = async (req, res) => {
   try {
@@ -36,6 +38,8 @@ export const addSingleUserController = async (req, res) => {
     if (Object.keys(newUser).length === 0) {
       res.status(400).send("bad request");
     }
+    const hashedPassword = await hashPass(req.body.password)
+    newUser.password = hashedPassword
     const user = await addSingleUser(newUser);
     res.send(user);
   } catch (e) {
@@ -83,5 +87,25 @@ export const updateUserController =  async (req, res) => {
     } catch (e) {
       console.log(e);
       res.status(500).send({ message: e });
+    }
+  }
+
+  export const loginUser = async (req,res) => {
+    try{
+      const {email, password} = req.body;
+      const foundUser = await getUserByEmail(email)
+      if(!foundUser){
+        res.status(404).send({ message: "user does not exist" });
+      }
+      console.log(foundUser)
+      const isUserVerified = await comparePassWithDBPass(password, foundUser.password)
+      if(!isUserVerified){
+        res.status(401).send({ message: "password does not match" });
+      }
+      const userToFront = {email: foundUser.email, username: foundUser.username, _id: foundUser._id}
+      res.status(200).send(userToFront)
+
+    } catch(e){
+      console.log(e)
     }
   }

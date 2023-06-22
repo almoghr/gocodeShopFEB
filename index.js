@@ -18,6 +18,7 @@ import {
   deleteUserController,
   getAllUsersController,
   getUserByIdController,
+  loginUser,
   updateUserController,
 } from "./controllers/User.js";
 
@@ -47,6 +48,7 @@ app.delete("/api/product/:id/", deleteProductController);
 app.get("/api/users", getAllUsersController);
 app.get("/api/user/:id", getUserByIdController);
 app.post("/api/user", addSingleUserController);
+app.post("/api/user/login", loginUser)
 app.put("/api/user/:id", updateUserController);
 app.delete("/api/user/:id/", deleteUserController);
 

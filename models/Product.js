@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-console.log(3)
 const productSchema = new mongoose.Schema({
     title: {
       type: String,
@@ -9,7 +8,7 @@ const productSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
-    description: {
+    description: {  
       type: String,
       required: true,
     },
